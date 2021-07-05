@@ -13,7 +13,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var linearLayoutManager: LinearLayoutManager
     lateinit var binding: ActivityMainBinding
-    private val myStudentList = arrayOf(Student(0,"khalid","hameed"),Student(0,"amir","Muhammad"),Student(0,"janan","dakhra"))
+    private val myStudentList = arrayOf(Student(0,"khalid","hameed",1),Student(0,"amir","Muhammad",1),Student(0,"janan","dakhra",2))
+
     private lateinit var db:RoomFromMarkMurphy
 
 
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity() {
 
             delay(5000)
             val addedSizeOfStudents = db.studentDao().addStudents(*myStudentList)
+            db.studentDao().addClasses(ScClass(0,"classOne"),ScClass(0,"classTwo"))
             Toast.makeText(this@MainActivity,addedSizeOfStudents.size.toString(),Toast.LENGTH_LONG).show()
 
         }
@@ -41,6 +43,11 @@ class MainActivity : AppCompatActivity() {
         db.studentDao().getAllStudents().observe(this) {
 
             binding.rcv.adapter = StudentAdapter(it as ArrayList<Student>)
+        }
+
+        //showing student in class in toast
+        db.studentDao().getStudentWithClassBasedOnId(1).observe(this){
+            Toast.makeText(this,"${it?.student?.id}  ${it?.scClass?.className}",Toast.LENGTH_LONG).show()
         }
 
     }

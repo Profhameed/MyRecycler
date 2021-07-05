@@ -63,3 +63,4 @@ class StudentAdapter(private val studentsList: ArrayList<Student>) :
     inner class StudentAdapterViewHolder(val listBinding: ListItemBinding) :
         RecyclerView.ViewHolder(listBinding.root)
 }
+

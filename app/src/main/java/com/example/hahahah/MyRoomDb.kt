@@ -34,7 +34,7 @@ import androidx.room.RoomDatabase
 //}
 private const val DB_NAME = "mydb.db"
 
-@Database(entities = [Student::class],version=1)
+@Database(entities = [Student::class,ScClass::class],version=1)
 abstract class RoomFromMarkMurphy:RoomDatabase(){
 
     abstract fun studentDao():StudentDao
